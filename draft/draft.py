@@ -10,7 +10,8 @@ def main():
         if current_state == target_word:
             print("Congratulations! You won!")
             break
-    print("Game over! You used all your lives!")
+    if lives == 0:
+        print("Game over! You used all your lives!")
 
 def get_word():
     target_word = input("What is the word to be guessed ?").lower()
@@ -38,20 +39,23 @@ def get_guess(suggested_letters):
         
 def access_guess(secret_word, guessed_letter, lives):
     if guessed_letter in secret_word:
-        print("Well done! The letter is in the secret word!")
+        print(f"Well done! The letter {guessed_letter} is in the secret word!")
     else:
-        print("Sorry! Your guess is wrong and you lost one life")
         lives = lives - 1
+        if lives > 1:
+            print(f"Sorry! Your guess is wrong! You have {lives} lives left.")
+        else:
+            print(f"Sorry! Your guess is wrong! You have {lives} life left.")
     return lives
 
 def display_word(secret_word, suggested_letters):
     displayed_word = len(secret_word) * "_"
+    list_displayed = list(displayed_word)
     for letter in suggested_letters:
-        if letter in secret_word:
-            index = secret_word.index(letter)
-            list_displayed = list(displayed_word)
-            list_displayed[index] = letter
-            displayed_word = "".join(list_displayed)
+        for i in range(len(secret_word)):
+            if secret_word[i] == letter:
+                list_displayed[i] = letter
+                displayed_word = "".join(list_displayed)
     return displayed_word
 
-main()       
+main()
