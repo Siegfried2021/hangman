@@ -1,7 +1,9 @@
+import random
+
 class Hangman:
-    def __init__(self, word_to_find, lives: int=5):
+    def __init__(self, lives: int=5):
         self.possible_words = ['becode', 'learning', 'mathematics', 'sessions', 'python', 'success', 'burger']
-        self.word_to_find = word_to_find
+        self.word_to_find = random.choice(self.possible_words)
         self.lives = lives
         self.correclty_guessed_letters = []
         self.wrongly_guessed_letters = []
@@ -35,6 +37,7 @@ class Hangman:
                 if self.word_to_find[i] == letter:
                     list_displayed[i] = letter
                     displayed_word = "".join(list_displayed)
+        print(displayed_word)
         if displayed_word == self.word_to_find:
             print(f"You found the word: {self.word_to_find} in {self.turn_count} turns with {self.error_count} errors!")
             return True
@@ -44,4 +47,4 @@ class Hangman:
     def game_over(self):
         if self.error_count == self.lives:
             self.lives = 0
-            print("Game over...")
+            print(f"Game over... The secret word was {self.word_to_find}.")
