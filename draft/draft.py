@@ -7,7 +7,7 @@ def main():
         lives = access_guess(word_to_find, letter, lives)
         current_state = display_word(word_to_find, suggested_letters)
         print(current_state)
-        if current_state == target_word:
+        if current_state == word_to_find:
             print("Congratulations! You won!")
             break
     if lives == 0:
