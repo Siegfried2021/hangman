@@ -1,11 +1,11 @@
 def main():
-    target_word = get_word()
+    word_to_find = get_word()
     lives = get_lives()
     suggested_letters = []
     while lives > 0:
         letter = get_guess(suggested_letters)
-        lives = access_guess(target_word, letter, lives)
-        current_state = display_word(target_word, suggested_letters)
+        lives = access_guess(word_to_find, letter, lives)
+        current_state = display_word(word_to_find, suggested_letters)
         print(current_state)
         if current_state == target_word:
             print("Congratulations! You won!")
@@ -14,8 +14,8 @@ def main():
         print("Game over! You used all your lives!")
 
 def get_word():
-    target_word = input("What is the word to be guessed ?").lower()
-    return target_word
+    word_to_find = input("What is the word to be guessed ?").lower()
+    return word_to_find
 
 def get_lives():
     number_lives = int(input("How many lives does the player will have?"))

@@ -1,6 +1,17 @@
 import random
 
 class Hangman:
+    """
+        A class representing the game at its initial space.
+        Attributes:
+        possible words : list of secret words to be selected from
+        word_to_find : randomly selected secret word
+        lives : number of lives to be used until the game is over
+        correctly_guessed_letters : list of correct guessed placed at the right index in the secret word
+        wrongly_guessed_letters : list of the player's wrongly guessed letters
+        turn_count = number of game turns corresponding to the number of guesses (correct or wrong)
+        error_count = number of wrong guesses leading to a decrease in lives
+    """
     def __init__(self, lives: int=5):
         self.possible_words = ['becode', 'learning', 'mathematics', 'sessions', 'python', 'success', 'burger', 'software']
         self.word_to_find = random.choice(self.possible_words)
@@ -11,6 +22,10 @@ class Hangman:
         self.error_count = 0
 
     def start_game(self, play, game_over, well_played):
+        """
+        Method initiating the game, updating the turn count, printing the updated attributes and handling the two possible
+        outcomes of the game: secret word found or game over.
+        """
         play()
         self.turn_count += 1
         print(f"Number of turns: {self.turn_count}")
@@ -25,6 +40,11 @@ class Hangman:
             well_played()
 
     def play(self):
+        """
+        Method initiating game turns until the end of the game, prompting the player for a letter guess, and handling the outcome : 
+        if correct, the guessed letter is added at the right index in the list corresponding to the length of the secret word.
+        If wrong, the proposed letter is added to the list of wrongly guessed letters, the error_count is updated, and the number of lives decreases by one.
+        """
         while True:
             letter_proposed = input("Which letter do you want to propose? ").lower()
             if len(letter_proposed) != 1:
@@ -45,7 +65,13 @@ class Hangman:
             return self.turn_count, self.error_count, self.lives, self.wrongly_guessed_letters, self.correclty_guessed_letters
             
     def well_played(self):
+        """
+        Method printing the outcome of the game if the player finds the secret word without exhausting the number of lives.
+        """
         print(f"You found the word {self.word_to_find} in {self.turn_count} turns with {self.error_count} errors!")
         
     def game_over(self):
+        """
+        Method triggering the end of the game if the player exceeds his lives count without finding the secret word.
+        """
         print(f"Game over... The secret word was {self.word_to_find}.")
