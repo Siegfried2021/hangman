@@ -65,7 +65,7 @@ Project Structure
 
 The project directory structure is as follows:
 
-css
+sh
 
 hangman
 │
