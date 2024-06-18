@@ -41,7 +41,7 @@ class Hangman:
 
     def play(self):
         """
-        Method initiating game turns until the end of the game, prompting the player for a letter guess, and handling the outcome : 
+        Method initiating game turns until the end of the game, prompting the player for a letter guess, handling unwanted inputs, and handling the proposed letter : 
         if correct, the guessed letter is added at the right index in the list corresponding to the length of the secret word.
         If wrong, the proposed letter is added to the list of wrongly guessed letters, the error_count is updated, and the number of lives decreases by one.
         """
@@ -49,6 +49,9 @@ class Hangman:
             letter_proposed = input("Which letter do you want to propose? ").lower()
             if len(letter_proposed) != 1:
                 print("You should propose only one letter!")
+                continue
+            if not letter_proposed.isalpha():
+                print("You must propose a letter!")
                 continue
             if letter_proposed in self.correclty_guessed_letters or letter_proposed in self.wrongly_guessed_letters:
                 print("You already proposed this letter!")
